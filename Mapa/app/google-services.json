@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "200210046339",
+    "project_id": "mapa-teste-1ponto0",
+    "storage_bucket": "mapa-teste-1ponto0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:200210046339:android:3e1f77626c578ac0552ab6",
+        "android_client_info": {
+          "package_name": "com.marcosk.mapa"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "200210046339-v2k73g07os2jj02g49gs0otl7c4g48g2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyANazuTiZnCBpD9voWdJ4oEBGmOUVnjOns"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "200210046339-v2k73g07os2jj02g49gs0otl7c4g48g2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
