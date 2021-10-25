@@ -46,6 +46,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
         mMap.uiSettings.isZoomControlsEnabled = true
         mMap.setOnMapClickListener (this)
         setUpMap()
+        mMap.setOnMarkerClickListener(this)
     }
 
     //função que verifica as permissões do app
@@ -69,9 +70,9 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
     }
 
 
-    //função quando e colocado um markador na localização atual
-    private fun placeMarkerOnMap(currentLatLong: LatLng) {
-        val markerOptions = MarkerOptions().position(currentLatLong)
+    //função quando e colocado um markador na localização clicada no mapa
+    private fun placeMarkerOnMap(temporaryMarker: LatLng) {
+        val markerOptions = MarkerOptions().position(temporaryMarker)
         if (!this.markerOnMap) {
             this.marker = mMap.addMarker(markerOptions)
             this.markerOnMap = true
@@ -86,11 +87,14 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
         marker.remove()
     }
 
-    override fun onMarkerClick(p0: Marker) = false
+    override fun onMarkerClick(p0: Marker): Boolean {
+        Toast.makeText(this,"Ola",Toast.LENGTH_SHORT).show()
+        return false
+    }
 
-    override fun onMapClick(p0: LatLng) {
-        placeMarkerOnMap(p0)
-        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(p0,12f))
+    override fun onMapClick(temporaryMarker: LatLng) {
+        placeMarkerOnMap(temporaryMarker)
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(temporaryMarker,12f))
     }
 
 
