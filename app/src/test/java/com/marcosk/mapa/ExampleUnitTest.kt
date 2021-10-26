@@ -1,4 +1,4 @@
-package com.example.myapplication
+package com.marcosk.mapa
 
 import org.junit.Test
 
