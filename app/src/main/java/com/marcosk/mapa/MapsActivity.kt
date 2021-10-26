@@ -18,7 +18,7 @@ import com.google.android.gms.maps.model.*
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener, GoogleMap.OnMapClickListener {
 
     private var markerOnMap:Boolean = false
-    private lateinit var marker:Marker
+    private lateinit var marker: Marker
     private lateinit var mMap: GoogleMap
     private lateinit var lastLocation: Location
     private lateinit var fusedLocationClient: FusedLocationProviderClient
@@ -96,6 +96,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
         placeMarkerOnMap(temporaryMarker)
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(temporaryMarker,12f))
     }
+
+
 
 
 }
