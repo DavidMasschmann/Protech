@@ -4,9 +4,13 @@ import android.Manifest
 import android.content.pm.PackageManager
 import android.location.Location
 import android.os.Bundle
+import android.view.View
+import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentContainerView
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -14,6 +18,7 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.*
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener, GoogleMap.OnMapClickListener {
 
@@ -37,13 +42,23 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
 
+        val button : FloatingActionButton = findViewById(R.id.add_marker)
+
+        button.setOnClickListener{
+            Toast.makeText(this, "You clicked me.", Toast.LENGTH_SHORT).show()
+        }
+
+//        val fragmentContainer : FragmentContainerView = findViewById(R.id.fragmentContainerView)
+
     }
 
     //Quando o mapa estiver carregado ele executa essa função
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
 
-        mMap.uiSettings.isZoomControlsEnabled = true
+        // Ativa os botões de zoom do Google
+        //mMap.uiSettings.isZoomControlsEnabled = true
+
         mMap.setOnMapClickListener (this)
         setUpMap()
         mMap.setOnMarkerClickListener(this)
@@ -80,7 +95,6 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
             removeMarkerOnMap(this.marker)
             this.marker = mMap.addMarker(markerOptions)
         }
-
     }
 
     private fun removeMarkerOnMap(marker: Marker){
@@ -96,8 +110,4 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
         placeMarkerOnMap(temporaryMarker)
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(temporaryMarker,12f))
     }
-
-
 }
-
-
