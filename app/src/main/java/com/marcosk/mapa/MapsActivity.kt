@@ -28,6 +28,9 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
     private lateinit var lastLocation: Location
     private lateinit var fusedLocationClient: FusedLocationProviderClient
 
+    private lateinit var add_marker_button: FloatingActionButton
+    private lateinit var fragment_floating_add_menu: Floating_add_menu
+
     companion object{
         private const val LOCATION_REQUEST_CODE = 1
     }
@@ -42,15 +45,27 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
 
-        val button : FloatingActionButton = findViewById(R.id.add_marker)
+        add_marker_button = findViewById(R.id.add_marker)
+        fragment_floating_add_menu = Floating_add_menu()
 
-        button.setOnClickListener{
-            Toast.makeText(this, "You clicked me.", Toast.LENGTH_SHORT).show()
+
+
+        add_marker_button.setOnClickListener{
+//            setFragment(fragment_floating_add_menu)
+//            Toast.makeText(this, "You clicked me.", Toast.LENGTH_SHORT).show()
         }
 
 //        val fragmentContainer : FragmentContainerView = findViewById(R.id.fragmentContainerView)
 
     }
+
+    private fun setFragment(fragment: Fragment){
+        val fragmentTransaction = supportFragmentManager.beginTransaction()
+        fragmentTransaction.replace(R.id.fragmentContainerView, fragment)
+        fragmentTransaction.commit()
+    }
+
+    emptyFragment
 
     //Quando o mapa estiver carregado ele executa essa função
     override fun onMapReady(googleMap: GoogleMap) {
