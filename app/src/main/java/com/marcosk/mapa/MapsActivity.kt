@@ -65,7 +65,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
         fragmentTransaction.commit()
     }
 
-    emptyFragment
+    //emptyFragment
 
     //Quando o mapa estiver carregado ele executa essa função
     override fun onMapReady(googleMap: GoogleMap) {
