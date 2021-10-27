@@ -3,8 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="500dp"
-    android:padding="16dp">
+    android:layout_height="475dp"
+    android:background="@color/white"
+    android:padding="16dp"
+    android:tag="test">
+
 
     <Button
         android:id="@+id/add_crime_map"
@@ -27,54 +30,58 @@
         android:layout_marginBottom="16dp"
         android:adjustViewBounds="true"
         android:backgroundTint="#00FFFFFF"
+        android:contentDescription="Crime grave"
         android:cropToPadding="false"
         android:padding="0dp"
         android:scaleType="fitCenter"
         app:layout_constraintBottom_toTopOf="@+id/add_crime_map"
         app:srcCompat="@drawable/severe_crime_button"
-        tools:layout_editor_absoluteX="86dp"
-        android:contentDescription="Crime grave"/>
+        tools:layout_editor_absoluteX="86dp" />
 
     <ImageButton
         android:id="@+id/light_crime_button"
-        android:layout_width="wrap_content"
+        android:layout_width="150dp"
         android:layout_height="62dp"
         android:layout_marginBottom="8dp"
         android:adjustViewBounds="true"
         android:backgroundTint="#00FFFFFF"
+        android:contentDescription="Crime leve"
         android:cropToPadding="false"
         android:padding="0dp"
         android:scaleType="fitCenter"
         app:layout_constraintBottom_toTopOf="@+id/severe_crime_button"
         app:layout_constraintStart_toStartOf="@+id/severe_crime_button"
-        app:srcCompat="@drawable/light_crime_button"
-        android:contentDescription="Crime leve"/>
+        app:srcCompat="@drawable/light_crime_button" />
 
     <ImageButton
         android:id="@+id/regular_crime_button"
-        android:layout_width="wrap_content"
+        android:layout_width="150dp"
         android:layout_height="62dp"
         android:layout_marginBottom="8dp"
         android:adjustViewBounds="true"
         android:backgroundTint="#00FFFFFF"
+        android:contentDescription="Crime regular"
         android:cropToPadding="false"
         android:padding="0dp"
         android:scaleType="fitCenter"
         app:layout_constraintBottom_toTopOf="@+id/severe_crime_button"
         app:layout_constraintEnd_toEndOf="@+id/severe_crime_button"
-        app:srcCompat="@drawable/regular_crime_button"
-        android:contentDescription="Crime regular" />
+        app:srcCompat="@drawable/regular_crime_button" />
 
     <EditText
         android:id="@+id/multline_description"
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:layout_marginBottom="16dp"
-        android:ems="10"
+        android:background="@drawable/rounded_fragment_edittext"
+        android:elevation="4dp"
         android:gravity="start|top"
         android:hint="Description"
         android:inputType="textMultiLine"
         android:maxLines="3"
+        android:padding="16dp"
+        android:textColor="@color/high_emphasis_text"
+        android:textColorHint="@color/medium_emphasis_text"
         app:layout_constraintBottom_toTopOf="@+id/light_crime_button"
         tools:layout_editor_absoluteX="71dp" />
 
@@ -83,10 +90,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:ems="10"
+        android:background="@drawable/rounded_fragment_edittext"
+        android:elevation="4dp"
         android:hint="Crime"
         android:inputType="textPersonName"
         android:minHeight="48dp"
+        android:padding="16dp"
+        android:textColor="@color/black"
+        android:textColorHint="@color/medium_emphasis_text"
         app:layout_constraintBottom_toTopOf="@+id/multline_description"
         tools:layout_editor_absoluteX="44dp" />
 
@@ -97,6 +108,7 @@
         android:layout_marginBottom="8dp"
         android:text="Dropped Pin"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toTopOf="@+id/crime_name"
         app:layout_constraintStart_toStartOf="@+id/crime_name" />
 
