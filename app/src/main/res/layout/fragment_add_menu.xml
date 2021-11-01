@@ -10,7 +10,7 @@
 
 
     <Button
-        android:id="@+id/add_crime_map"
+        android:id="@+id/add_crime_button"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_gravity="start"
@@ -34,7 +34,7 @@
         android:cropToPadding="false"
         android:padding="0dp"
         android:scaleType="fitCenter"
-        app:layout_constraintBottom_toTopOf="@+id/add_crime_map"
+        app:layout_constraintBottom_toTopOf="@+id/add_crime_button"
         app:srcCompat="@drawable/severe_crime_button"
         tools:layout_editor_absoluteX="86dp" />
 

@@ -1,19 +1,13 @@
 package com.marcosk.mapa
 
 import android.Manifest
-import android.app.PendingIntent.getActivity
 import android.content.pm.PackageManager
 import android.location.Location
 import android.os.Bundle
-import android.view.View
-import android.widget.Button
 import android.widget.Toast
-import androidx.annotation.NonNull
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentContainerView
-import androidx.fragment.app.FragmentManager
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -32,7 +26,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
     private lateinit var fusedLocationClient: FusedLocationProviderClient
 
     private lateinit var add_marker_button: FloatingActionButton
-    private lateinit var fragment_floating_add_menu: Floating_add_menu
+    private lateinit var fragment_add_menu: Fragment_add_menu
+    private lateinit var fragment_time_filter_menu: Fragment_time_filter_menu
 
     private lateinit var test_button: FloatingActionButton
 
@@ -51,16 +46,16 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
 
         add_marker_button = findViewById(R.id.add_marker)
-        fragment_floating_add_menu = Floating_add_menu()
+        fragment_add_menu = Fragment_add_menu()
 
         add_marker_button.setOnClickListener{
-            setFragment(fragment_floating_add_menu)
+            setFragment(fragment_add_menu)
         }
 
         test_button = findViewById(R.id.notification_button)
 
         test_button.setOnClickListener{
-            emptyFragment(fragment_floating_add_menu)
+            emptyFragment(fragment_add_menu)
         }
     }
 
@@ -103,7 +98,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
             if (location != null) {
                 lastLocation = location
                 val currentLatLong = LatLng(location.latitude, location.longitude)
-                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLatLong, 12f))
+                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLatLong, 15f))
             }
         }
     }
@@ -132,6 +127,6 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
 
     override fun onMapClick(temporaryMarker: LatLng) {
         placeMarkerOnMap(temporaryMarker)
-        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(temporaryMarker,12f))
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(temporaryMarker,15f))
     }
 }
