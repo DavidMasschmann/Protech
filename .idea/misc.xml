@@ -1,5 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/marco/Documents/Estudo/projeto TCC/Protech/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.403125" />
+        <entry key="..\:/Users/marco/Documents/Estudo/projeto TCC/Protech/app/src/main/res/drawable/ic_baseline_adb_24.xml" value="0.403125" />
+        <entry key="..\:/Users/marco/Documents/Estudo/projeto TCC/Protech/app/src/main/res/drawable/ic_baseline_add_24.xml" value="0.403125" />
+        <entry key="..\:/Users/marco/Documents/Estudo/projeto TCC/Protech/app/src/main/res/drawable/ic_baseline_history_24.xml" value="0.403125" />
+        <entry key="..\:/Users/marco/Documents/Estudo/projeto TCC/Protech/app/src/main/res/drawable/ic_baseline_notifications_none_24.xml" value="0.403125" />
+        <entry key="..\:/Users/marco/Documents/Estudo/projeto TCC/Protech/app/src/main/res/drawable/ic_baseline_settings_24.xml" value="0.403125" />
+        <entry key="..\:/Users/marco/Documents/Estudo/projeto TCC/Protech/app/src/main/res/drawable/ic_group_3.xml" value="0.403125" />
+        <entry key="..\:/Users/marco/Documents/Estudo/projeto TCC/Protech/app/src/main/res/drawable/ic_group_56.xml" value="0.27037037037037037" />
+        <entry key="..\:/Users/marco/Documents/Estudo/projeto TCC/Protech/app/src/main/res/drawable/ic_launcher_background.xml" value="0.403125" />
+        <entry key="..\:/Users/marco/Documents/Estudo/projeto TCC/Protech/app/src/main/res/drawable/regular_icon.xml" value="0.27037037037037037" />
+        <entry key="..\:/Users/marco/Documents/Estudo/projeto TCC/Protech/app/src/main/res/layout/activity_maps.xml" value="0.38697916666666665" />
+        <entry key="..\:/Users/marco/Documents/Estudo/projeto TCC/Protech/app/src/main/res/layout/custom_marker_info.xml" value="0.38697916666666665" />
+      </map>
+    </option>
+  </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
