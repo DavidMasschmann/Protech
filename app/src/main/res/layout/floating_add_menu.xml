@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="500dp"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:clickable="true" >
 
     <Button
         android:id="@+id/add_crime_button"
