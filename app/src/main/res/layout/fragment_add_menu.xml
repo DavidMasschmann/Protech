@@ -6,8 +6,7 @@
     android:layout_height="475dp"
     android:background="@color/white"
     android:padding="16dp"
-    android:tag="test">
-
+    android:clickable="true">
 
     <Button
         android:id="@+id/add_crime_button"
@@ -15,7 +14,7 @@
         android:layout_height="60dp"
         android:layout_gravity="start"
         android:backgroundTint="@color/main_yellow"
-        android:enabled="false"
+        android:enabled="true"
         android:paddingHorizontal="16dp"
         android:text="Add Crime to the Map"
         android:textColor="@color/black"

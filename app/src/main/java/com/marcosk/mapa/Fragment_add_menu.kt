@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.EditText
 import android.widget.Toast
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.marcosk.mapa.databinding.FragmentAddMenuBinding
@@ -17,9 +18,10 @@ import com.google.android.material.button.MaterialButton
  * Use the [Fragment_add_menu.newInstance] factory method to
  * create an instance of this fragment.
  */
-class Fragment_add_menu : Fragment() {
 
-    private lateinit var add_crime_button: Button
+class Fragment_add_menu : Fragment(){
+
+    lateinit var add_crime_button: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,20 +32,33 @@ class Fragment_add_menu : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-// *      One of my tests that didn't work
 
         val view: View = inflater.inflate(R.layout.fragment_add_menu, container, false)
 
         add_crime_button = view.findViewById(R.id.add_crime_button)
 
-        add_crime_button.setOnClickListener { view ->
-            Toast.makeText(context, "HAHA", Toast.LENGTH_SHORT).show()
+        val test = view.findViewById(R.id.crime_name) as EditText
+
+// *      Test onClickListener
+//        add_crime_button.setOnClickListener { view ->
+//            MapsActivity
+//            Toast.makeText(context, "HAHA", Toast.LENGTH_SHORT).show()
+//        }
+
+        add_crime_button.setOnClickListener{
+            if (test.text.toString() != "")
+            Toast.makeText(context, test.text, Toast.LENGTH_SHORT).show()
+
+            test.text.clear()
+            val activityVariable: MapsActivity = activity as MapsActivity
+            activityVariable.emptyFragment(this)
+
         }
 
         return view
 
-// *    One of my tests that didn't work
-//        val view: View = inflater.inflate(R.layout.floating_add_menu, container, false)
+// *    This does work, but the click is anywhere in the view
+//        val view: View = inflater.inflate(R.layout.fragment_add_menu, container, false)
 //
 //        view.setOnClickListener(){
 //            Toast.makeText(context, "HAHA", Toast.LENGTH_SHORT).show()
@@ -59,29 +74,12 @@ class Fragment_add_menu : Fragment() {
 //        Toast.makeText(context, "ANTES", Toast.LENGTH_SHORT).show()
 //
 //        bind.addCrimeButton.setOnClickListener {
-////            Toast.makeText(context, "HAHA", Toast.LENGTH_SHORT).show()
+//            Toast.makeText(context, "HAHA", Toast.LENGTH_SHORT).show()
 //        }
-
+//
 //        return bind.root
 
 // *    Original return
 //      return inflater.inflate(R.layout.fragment_add_menu, container, false)
     }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-//        add_crime_button = view.findViewById(R.id.add_crime_button)
-//
-//        add_crime_button.setOnClickListener(this)
-    }
-
-//    override fun onClick(p0: View?) {
-//        Toast.makeText(context, "ON CLICK", Toast.LENGTH_SHORT).show()
-//    }
-
-//    override fun onClick(p0: View?) {
-//        Toast.makeText(context, "fun", Toast.LENGTH_SHORT).show()
-//    }
-
 }
