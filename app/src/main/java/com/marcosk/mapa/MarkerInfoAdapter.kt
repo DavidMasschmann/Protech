@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.TextView
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.Marker
+import com.marcosk.mapa.Model.PlaceModel
 
 class MarkerInfoAdapter (private val context: Context) : GoogleMap.InfoWindowAdapter {
 
@@ -15,7 +16,7 @@ class MarkerInfoAdapter (private val context: Context) : GoogleMap.InfoWindowAda
 
     override fun getInfoContents(marker: Marker): View? {
 
-        val place = marker.tag as? Place ?: return null
+        val place = marker.tag as? PlaceModel ?: return null
 
         val view = LayoutInflater.from(context).inflate(R.layout.custom_marker_info, null)
 
