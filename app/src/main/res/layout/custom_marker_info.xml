@@ -26,8 +26,8 @@
         android:id="@+id/txt_type"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/dark_gray"
-        android:textSize="16sp"
-        android:text="Olá"/>
+        android:text="Olá"
+        android:textColor="@color/gray_600"
+        android:textSize="16sp" />
 
 </LinearLayout>
