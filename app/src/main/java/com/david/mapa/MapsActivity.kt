@@ -1,27 +1,25 @@
 package com.david.mapa
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.pm.PackageManager
 import android.location.Location
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
+import com.david.mapa.Model.PlaceModel
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.*
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.Marker
+import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.database.*
-import com.david.mapa.Model.PlaceModel
-import java.util.ArrayList
-import com.google.firebase.database.DataSnapshot
-
-
-
 
 
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener, GoogleMap.OnMapClickListener {
@@ -42,6 +40,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
 
     }
 
+
+    @SuppressLint("PotentialBehaviorOverride")
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
@@ -52,10 +52,10 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
 
         mapFragment.getMapAsync(this)
 
-        mapFragment.getMapAsync { googleMap ->
+        mapFragment.getMapAsync {
 
-            getData(googleMap)
-            googleMap.setInfoWindowAdapter(MarkerInfoAdapter(this))
+            getData(it)
+            it.setInfoWindowAdapter(MarkerInfoAdapter(this))
 
 
         }
@@ -71,6 +71,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
             setFragment(fragmentAddMenu)
 
         }
+
     }
 
     // * Adds input Fragment to fragmentContainerView inside activity_maps.xlm
@@ -90,12 +91,13 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
 
         val fragmentTransaction = supportFragmentManager.beginTransaction()
 
-        fragmentTransaction.remove(fragment);
+        fragmentTransaction.remove(fragment)
         fragmentTransaction.commit()
 
     }
 
     //Quando o mapa estiver carregado ele executa essa função
+    @SuppressLint("PotentialBehaviorOverride")
     override fun onMapReady(googleMap: GoogleMap) {
 
         mMap = googleMap
@@ -103,41 +105,33 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
         mMap.setOnMapClickListener(this)
         mMap.setOnMarkerClickListener(this)
 
-        setUpMap()
 
+        getPermissions()
     }
 
     //função que verifica as permissões do app
-    private fun setUpMap() {
-
+    private fun getPermissions() {
         if (ActivityCompat.checkSelfPermission(
                 this, Manifest.permission.ACCESS_FINE_LOCATION
             )
             != PackageManager.PERMISSION_GRANTED
         ) {
-
             ActivityCompat.requestPermissions(
                 this,
-                arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),
+                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
                 LOCATION_REQUEST_CODE
             )
-
             return
-
         }
-
         mMap.isMyLocationEnabled = true
-
         fusedLocationClient.lastLocation.addOnSuccessListener(this) { location ->
-
             if (location != null) {
-
                 lastLocation = location
-                val currentLatLong = LatLng(location.latitude, location.longitude)
+                val currentLatLong = LatLng(lastLocation.latitude, lastLocation.longitude)
                 mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLatLong, 15f))
-
             }
         }
+
     }
 
 
@@ -183,54 +177,51 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
 
         places.forEach { place ->
 
-            if (place != null) {
+            when (place.type) {
+                "Light" -> {
+                    val fixedMarker = googleMap.addMarker(
+                        MarkerOptions()
+                            .position(LatLng(place.lat, place.long))
+                            .title(place.title)
+                            .snippet(place.desc)
+                            .icon(
+                                BitmapHelper.vectorToBitmap(this, R.drawable.light_crime)
+                            )
+                    )
+                    fixedMarker?.tag = place
+                }
+                "Regular" -> {
+                    val fixedMarker = googleMap.addMarker(
+                        MarkerOptions()
+                            .position(LatLng(place.lat, place.long))
+                            .title(place.title)
+                            .snippet(place.desc)
+                            .icon(
+                                BitmapHelper.vectorToBitmap(this, R.drawable.regular_crime)
+                            )
+                    )
+                    fixedMarker?.tag = place
+                }
+                "Severe" -> {
 
-                when (place.type) {
-                    "Light" -> {
-                        val fixedMarker = googleMap.addMarker(
-                            MarkerOptions()
-                                .position(LatLng(place.lat, place.long))
-                                .title(place.title)
-                                .snippet(place.desc)
-                                .icon(
-                                    BitmapHelper.vectorToBitmap(this, R.drawable.light_crime)
-                                )
-                        )
-                        fixedMarker?.tag = place
-                    }
-                    "Regular" -> {
-                        val fixedMarker = googleMap.addMarker(
-                            MarkerOptions()
-                                .position(LatLng(place.lat, place.long))
-                                .title(place.title)
-                                .snippet(place.desc)
-                                .icon(
-                                    BitmapHelper.vectorToBitmap(this, R.drawable.regular_crime)
-                                )
-                        )
-                        fixedMarker?.tag = place
-                    }
-                    "Severe" -> {
+                    val fixedMarker = googleMap.addMarker(
+                        MarkerOptions()
+                            .position(LatLng(place.lat, place.long))
+                            .title(place.title)
+                            .snippet(place.desc)
+                            .icon(
+                                BitmapHelper.vectorToBitmap(this, R.drawable.severe_crime)
+                            )
+                    )
 
-                        val fixedMarker = googleMap.addMarker(
-                            MarkerOptions()
-                                .position(LatLng(place.lat, place.long))
-                                .title(place.title)
-                                .snippet(place.desc)
-                                .icon(
-                                    BitmapHelper.vectorToBitmap(this, R.drawable.severe_crime)
-                                )
-                        )
+                    fixedMarker?.tag = place
 
-                        fixedMarker?.tag = place
-
-                    }
                 }
             }
         }
     }
 
-        fun getData(googleMap: GoogleMap) {
+        private fun getData(googleMap: GoogleMap) {
 
             placeData = FirebaseDatabase.getInstance().getReference("Place")
 
@@ -238,7 +229,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
 
 
                 override fun onDataChange(snapshot: DataSnapshot) {
-                    val places: ArrayList<PlaceModel> = arrayListOf<PlaceModel>()
+                    val places: ArrayList<PlaceModel> = arrayListOf()
 
                     if (snapshot.exists()) {
 
