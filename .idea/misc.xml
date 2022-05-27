@@ -3,7 +3,24 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/marco/Documents/Estudo/projeto TCC/Protech/app/src/main/res/layout/fragment_add_menu.xml" value="0.38697916666666665" />
+        <entry key="..\:/Users/david/AndroidStudioProjects/ProTech/app/src/main/res/drawable-v24/myview.xml" value="0.2390625" />
+        <entry key="..\:/Users/david/AndroidStudioProjects/ProTech/app/src/main/res/drawable-v24/rounded_edittext.xml" value="0.2390625" />
+        <entry key="..\:/Users/david/AndroidStudioProjects/ProTech/app/src/main/res/drawable-v24/rounded_edittext_shadow.xml" value="0.2390625" />
+        <entry key="..\:/Users/david/AndroidStudioProjects/ProTech/app/src/main/res/drawable-v24/rounded_fragment_edittext.xml" value="0.2390625" />
+        <entry key="..\:/Users/david/AndroidStudioProjects/ProTech/app/src/main/res/drawable/bubble.xml" value="0.2390625" />
+        <entry key="..\:/Users/david/AndroidStudioProjects/ProTech/app/src/main/res/drawable/light_crime.xml" value="0.2390625" />
+        <entry key="..\:/Users/david/AndroidStudioProjects/ProTech/app/src/main/res/drawable/my_radio_button_style.xml" value="0.2390625" />
+        <entry key="..\:/Users/david/AndroidStudioProjects/ProTech/app/src/main/res/drawable/regular_crime.xml" value="0.2390625" />
+        <entry key="..\:/Users/david/AndroidStudioProjects/ProTech/app/src/main/res/drawable/severe_crime.xml" value="0.2390625" />
+        <entry key="..\:/Users/david/AndroidStudioProjects/ProTech/app/src/main/res/layout/activity_maps.xml" value="0.22291666666666668" />
+        <entry key="..\:/Users/david/AndroidStudioProjects/ProTech/app/src/main/res/layout/custom_marker_info.xml" value="0.5" />
+        <entry key="..\:/Users/david/AndroidStudioProjects/ProTech/app/src/main/res/layout/floating_add_menu.xml" value="0.2289156626506024" />
+        <entry key="..\:/Users/david/AndroidStudioProjects/ProTech/app/src/main/res/layout/fragment_add_menu.xml" value="0.33" />
+        <entry key="..\:/Users/david/AndroidStudioProjects/ProTech/app/src/main/res/layout/fragment_floating_add_menu.xml" value="0.33" />
+        <entry key="..\:/Users/david/AndroidStudioProjects/ProTech/app/src/main/res/layout/fragment_floating_add_menu_fragment.xml" value="0.22291666666666668" />
+        <entry key="..\:/Users/david/AndroidStudioProjects/ProTech/app/src/main/res/layout/fragment_time_filter_menu.xml" value="0.4425925925925926" />
+        <entry key="..\:/Users/david/AndroidStudioProjects/ProTech/app/src/main/res/layout/layout.xml" value="0.5" />
+        <entry key="..\:/Users/david/AndroidStudioProjects/ProTech/app/src/main/res/layout/sample_bubble.xml" value="0.67" />
       </map>
     </option>
   </component>
@@ -12,5 +29,12 @@
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.33" />
+      </ProjectState>
+    </option>
   </component>
 </project>

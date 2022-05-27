@@ -1,4 +1,4 @@
-package com.marcosk.mapa
+package com.david.mapa
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -6,7 +6,7 @@ import android.view.View
 import android.widget.TextView
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.Marker
-import com.marcosk.mapa.Model.PlaceModel
+import com.david.mapa.Model.PlaceModel
 
 class MarkerInfoAdapter (private val context: Context) : GoogleMap.InfoWindowAdapter {
 
@@ -23,6 +23,7 @@ class MarkerInfoAdapter (private val context: Context) : GoogleMap.InfoWindowAda
         view.findViewById<TextView>(R.id.txt_title).text = place.title
         view.findViewById<TextView>(R.id.txt_desc).text = place.desc
         view.findViewById<TextView>(R.id.txt_type).text = place.type
+
 
         return view
     }

@@ -4,6 +4,10 @@ import android.Manifest
 import android.content.pm.PackageManager
 import android.location.Location
 import android.os.Bundle
+import android.view.View
+import android.widget.Button
+import android.widget.EditText
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
@@ -16,126 +20,110 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.*
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.database.*
+import com.marcosk.mapa.Fragment_add_menu
 import com.marcosk.mapa.Model.PlaceModel
 import java.util.ArrayList
-import com.google.firebase.database.DataSnapshot
-
-
-
 
 
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener, GoogleMap.OnMapClickListener {
 
+//    private val places = arrayListOf(
+//        PlaceModel("Regular", "Crime Regular", "regular", LatLng(-23.5868031, -46.6843406)),
+//        PlaceModel("leve", "Crime leve", "light", LatLng(-23.5899619, -46.66747)),
+//        PlaceModel("Pesadão", "Crime Grave", "severe", LatLng(0.0, 0.0))
+//    )
+
+    private val places: ArrayList<PlaceModel?> = ArrayList<PlaceModel?>()
+
     private lateinit var placeData: DatabaseReference
+
+    private var markerOnMap:Boolean = false
+    lateinit var marker: Marker
     private lateinit var mMap: GoogleMap
     private lateinit var lastLocation: Location
     private lateinit var fusedLocationClient: FusedLocationProviderClient
-    private var markerOnMap: Boolean = false
-    private lateinit var fragmentAddMenu: Fragment_add_menu
 
-    lateinit var addMarkerButton: FloatingActionButton
-    lateinit var marker: Marker
+    lateinit var add_marker_button: FloatingActionButton
+    private lateinit var fragment_add_menu: Fragment_add_menu
 
-    companion object {
-
+    companion object{
         private const val LOCATION_REQUEST_CODE = 1
-
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_maps)
 
         val mapFragment = supportFragmentManager
             .findFragmentById(R.id.map) as SupportMapFragment
-
         mapFragment.getMapAsync(this)
 
-        mapFragment.getMapAsync { googleMap ->
-
-            getData(googleMap)
+        mapFragment.getMapAsync{ googleMap ->
             googleMap.setInfoWindowAdapter(MarkerInfoAdapter(this))
-
-
+            fetchData()
+            addMarkers(googleMap)
         }
+
+
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
 
-        fragmentAddMenu = Fragment_add_menu()
+        add_marker_button = findViewById(R.id.add_marker)
+        fragment_add_menu = Fragment_add_menu()
 
-        addMarkerButton = findViewById(R.id.add_marker)
-        addMarkerButton.hide()
-        addMarkerButton.setOnClickListener {
+        add_marker_button.hide()
 
-            setFragment(fragmentAddMenu)
-
+        add_marker_button.setOnClickListener{
+            setFragment(fragment_add_menu)
         }
     }
 
     // * Adds input Fragment to fragmentContainerView inside activity_maps.xlm
-    private fun setFragment(fragment: Fragment) {
-
+    private fun setFragment(fragment: Fragment){
         supportFragmentManager.beginTransaction().apply {
-
             replace(R.id.fragmentContainerView, fragment)
                 .addToBackStack(null)
                 .commit()
-
         }
     }
 
     // * Removes input Fragment of fragmentContainerView inside activity_maps.xlm
-    fun emptyFragment(fragment: Fragment) {
-
+    fun emptyFragment(fragment: Fragment){
         val fragmentTransaction = supportFragmentManager.beginTransaction()
-
         fragmentTransaction.remove(fragment);
         fragmentTransaction.commit()
-
     }
 
     //Quando o mapa estiver carregado ele executa essa função
     override fun onMapReady(googleMap: GoogleMap) {
-
         mMap = googleMap
+
+        // Ativa os botões de zoom do Google
+        //mMap.uiSettings.isZoomControlsEnabled = true
+
         mMap.uiSettings.isMapToolbarEnabled = false
-        mMap.setOnMapClickListener(this)
-        mMap.setOnMarkerClickListener(this)
 
+        mMap.setOnMapClickListener (this)
         setUpMap()
-
+        mMap.setOnMarkerClickListener(this)
     }
 
     //função que verifica as permissões do app
     private fun setUpMap() {
-
         if (ActivityCompat.checkSelfPermission(
-                this, Manifest.permission.ACCESS_FINE_LOCATION
-            )
-            != PackageManager.PERMISSION_GRANTED
-        ) {
-
-            ActivityCompat.requestPermissions(
                 this,
-                arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),
-                LOCATION_REQUEST_CODE
-            )
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED) {
 
+                ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION), LOCATION_REQUEST_CODE)
             return
-
         }
-
         mMap.isMyLocationEnabled = true
-
-        fusedLocationClient.lastLocation.addOnSuccessListener(this) { location ->
-
+        fusedLocationClient.lastLocation.addOnSuccessListener (this) { location ->
             if (location != null) {
-
                 lastLocation = location
                 val currentLatLong = LatLng(location.latitude, location.longitude)
                 mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLatLong, 15f))
-
             }
         }
     }
@@ -143,121 +131,127 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
 
     //função quando e colocado um markador na localização clicada no mapa
     private fun placeMarkerOnMap(temporaryMarker: LatLng) {
-
         val markerOptions = MarkerOptions().position(temporaryMarker)
-
         if (!this.markerOnMap) {
-
-            this.marker = mMap.addMarker(markerOptions)!!
+            this.marker = mMap.addMarker(markerOptions)
             this.markerOnMap = true
-
-        } else {
-
+        }else{
             removeMarkerOnMap(this.marker)
-            this.marker = mMap.addMarker(markerOptions)!!
-
+            this.marker = mMap.addMarker(markerOptions)
         }
     }
 
-    fun removeMarkerOnMap(marker: Marker) {
-
+    fun removeMarkerOnMap(marker: Marker){
         marker.remove()
-
     }
 
     override fun onMarkerClick(p0: Marker): Boolean {
-
+//        Toast.makeText(this,"Ola",Toast.LENGTH_SHORT).show()
         return false
-
     }
 
     override fun onMapClick(temporaryMarker: LatLng) {
-
         placeMarkerOnMap(temporaryMarker)
-        addMarkerButton.show()
-        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(temporaryMarker, 15f))
-
+        add_marker_button.show()
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(temporaryMarker,15f))
     }
 
-    private fun addMarkers(googleMap: GoogleMap, places: ArrayList<PlaceModel>) {
+    //Adiciona os marcadores ja existentes no mapa
+//    private fun addMarkers(googleMap: GoogleMap) {
+//        places.forEach{ place ->
+//            if (place.type == "light"){
+//                val fixedMarker = googleMap.addMarker(
+//                    MarkerOptions()
+//                        .position(place.latLang)
+//                        .title(place.title)
+//                        .snippet(place.desc)
+//                        .icon(
+//                            BitmapHelper.vectorToBitmap(this, R.drawable.light_crime)
+//                        )
+//                )
+//                fixedMarker.tag = place
+//            }else if (place.type == "regular"){
+//                val fixedMarker = googleMap.addMarker(
+//                    MarkerOptions()
+//                        .position(place.latLang)
+//                        .title(place.title)
+//                        .snippet(place.desc)
+//                        .icon(
+//                            BitmapHelper.vectorToBitmap(this, R.drawable.regular_crime))
+//                )
+//                fixedMarker.tag = place
+//            }else if (place.type == "severe"){
+//                val fixedMarker = googleMap.addMarker(
+//                    MarkerOptions()
+//                        .position(place.latLang)
+//                        .title(place.title)
+//                        .snippet(place.desc)
+//                        .icon(
+//                            BitmapHelper.vectorToBitmap(this, R.drawable.severe_crime))
+//                )
+//                fixedMarker.tag = place
+//            }
+//
+//        }
+//    }
 
+    private fun addMarkers(googleMap: GoogleMap) {
         places.forEach { place ->
-
             if (place != null) {
-
-                when (place.type) {
-                    "Light" -> {
-                        val fixedMarker = googleMap.addMarker(
-                            MarkerOptions()
-                                .position(LatLng(place.lat, place.long))
-                                .title(place.title)
-                                .snippet(place.desc)
-                                .icon(
-                                    BitmapHelper.vectorToBitmap(this, R.drawable.light_crime)
-                                )
-                        )
-                        fixedMarker?.tag = place
-                    }
-                    "Regular" -> {
-                        val fixedMarker = googleMap.addMarker(
-                            MarkerOptions()
-                                .position(LatLng(place.lat, place.long))
-                                .title(place.title)
-                                .snippet(place.desc)
-                                .icon(
-                                    BitmapHelper.vectorToBitmap(this, R.drawable.regular_crime)
-                                )
-                        )
-                        fixedMarker?.tag = place
-                    }
-                    "Severe" -> {
-
-                        val fixedMarker = googleMap.addMarker(
-                            MarkerOptions()
-                                .position(LatLng(place.lat, place.long))
-                                .title(place.title)
-                                .snippet(place.desc)
-                                .icon(
-                                    BitmapHelper.vectorToBitmap(this, R.drawable.severe_crime)
-                                )
-                        )
-
-                        fixedMarker?.tag = place
-
-                    }
+                if (place.type == "light") {
+                    val fixedMarker = googleMap.addMarker(
+                        MarkerOptions()
+                            .position(place.latLang)
+                            .title(place.title)
+                            .snippet(place.desc)
+                            .icon(
+                                BitmapHelper.vectorToBitmap(this, R.drawable.light_crime)
+                            )
+                    )
+                    fixedMarker.tag = place
+                } else if (place.type == "regular") {
+                    val fixedMarker = googleMap.addMarker(
+                        MarkerOptions()
+                            .position(place.latLang)
+                            .title(place.title)
+                            .snippet(place.desc)
+                            .icon(
+                                BitmapHelper.vectorToBitmap(this, R.drawable.regular_crime)
+                            )
+                    )
+                    fixedMarker.tag = place
+                } else if (place.type == "severe") {
+                    val fixedMarker = googleMap.addMarker(
+                        MarkerOptions()
+                            .position(place.latLang)
+                            .title(place.title)
+                            .snippet(place.desc)
+                            .icon(
+                                BitmapHelper.vectorToBitmap(this, R.drawable.severe_crime)
+                            )
+                    )
+                    fixedMarker.tag = place
                 }
             }
         }
     }
 
-        fun getData(googleMap: GoogleMap) {
+    fun fetchData(){
+        placeData = FirebaseDatabase.getInstance().getReference("places")
 
-            placeData = FirebaseDatabase.getInstance().getReference("Place")
+        placeData.addValueEventListener(object: ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                for (placesSnapshot in dataSnapshot.children) {
+                    val place: PlaceModel? = placesSnapshot.getValue(PlaceModel::class.java)
 
-            placeData.addValueEventListener(object : ValueEventListener {
-
-
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    val places: ArrayList<PlaceModel> = arrayListOf<PlaceModel>()
-
-                    if (snapshot.exists()) {
-
-                        for (data in snapshot.children) {
-
-                            val place = data.getValue(PlaceModel::class.java)
-                            if (place != null) {
-                                places.add(place)
-                            }
-                        }
-
-                        addMarkers(googleMap, places)
-
-                    }
+                    places.add(place)
                 }
+            }
 
-                override fun onCancelled(error: DatabaseError) {
-                    TODO("Not yet implemented")
-                }
-            })
-        }
+            override fun onCancelled(databaseError: DatabaseError) {
+                throw databaseError.toException()
+            }
+
+        })
     }
+}
