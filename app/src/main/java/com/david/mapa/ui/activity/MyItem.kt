@@ -1,4 +1,4 @@
-package com.david.mapa
+package com.david.mapa.ui.activity
 
 import com.google.android.gms.maps.model.LatLng
 import com.google.maps.android.clustering.ClusterItem

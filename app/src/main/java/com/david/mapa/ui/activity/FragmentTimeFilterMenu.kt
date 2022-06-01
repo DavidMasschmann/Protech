@@ -1,10 +1,11 @@
-package com.david.mapa
+package com.david.mapa.ui.activity
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.david.mapa.R
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -13,11 +14,11 @@ private const val ARG_PARAM2 = "param2"
 
 /**
  * A simple [Fragment] subclass.
- * Use the [fragment_time_filter_menu.newInstance] factory method to
+ * Use the [FragmentTimeFilterMenu.newInstance] factory method to
  * create an instance of this fragment.
  */
 
-class Fragment_time_filter_menu : Fragment() {
+class FragmentTimeFilterMenu : Fragment() {
 
     // TODO: Rename and change types of parameters
     private var param1: String? = null
@@ -55,7 +56,7 @@ class Fragment_time_filter_menu : Fragment() {
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
 
-            Fragment_time_filter_menu().apply {
+            FragmentTimeFilterMenu().apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, param1)
                     putString(ARG_PARAM2, param2)
