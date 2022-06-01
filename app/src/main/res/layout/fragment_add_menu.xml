@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:padding="16dp"
+    android:clickable="true">
+
+    <Button
+        android:id="@+id/add_crime_button"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_gravity="start"
+        android:backgroundTint="@color/main_yellow"
+        android:enabled="true"
+        android:paddingHorizontal="16dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/add_crime_to_the_map"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toBottomOf="@id/crime_type"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/crime_description"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/rounded_fragment_edittext"
+        android:elevation="4dp"
+        android:gravity="start|top"
+        android:hint="@string/description"
+        android:inputType="textMultiLine"
+        android:maxLines="3"
+        android:padding="16dp"
+        android:textColor="@color/high_emphasis_text"
+        android:textColorHint="@color/medium_emphasis_text"
+        app:layout_constraintTop_toBottomOf="@+id/crime_name"
+        tools:layout_editor_absoluteX="16dp"
+        android:importantForAutofill="no" />
+
+    <EditText
+        android:id="@+id/crime_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/rounded_fragment_edittext"
+        android:elevation="4dp"
+        android:hint="@string/crime"
+        android:inputType="textPersonName"
+        android:minHeight="48dp"
+        android:padding="16dp"
+        android:textColor="@color/black"
+        android:textColorHint="@color/medium_emphasis_text"
+        app:layout_constraintBottom_toTopOf="@+id/crime_description"
+        tools:layout_editor_absoluteX="44dp"
+        android:importantForAutofill="no" />
+
+    <TextView
+        android:id="@+id/dropped_pin_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:text="@string/dropped_pin"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toTopOf="@+id/crime_name"
+        app:layout_constraintStart_toStartOf="@+id/crime_name" />
+
+    <RadioGroup
+        android:id="@+id/crime_type"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/crime_description">
+
+        <RadioButton
+            android:id="@+id/light_radio"
+            android:text="@string/light"
+            android:drawableTop="@drawable/light_crime"
+
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+
+            android:button="@color/transparent"
+            android:textAlignment="center"
+            android:layout_weight="1"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            />
+
+        <RadioButton
+            android:id="@+id/regular_radio"
+            android:text="@string/regular"
+            android:drawableTop="@drawable/regular_crime"
+
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+
+            android:button="@color/transparent"
+            android:textAlignment="center"
+            android:layout_weight="1"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            />
+
+        <RadioButton
+            android:id="@+id/severe_radio"
+            android:text="@string/severe"
+            android:drawableTop="@drawable/severe_crime"
+
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+
+            android:button="@color/transparent"
+            android:textAlignment="center"
+            android:layout_weight="1"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            />
+    </RadioGroup>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
