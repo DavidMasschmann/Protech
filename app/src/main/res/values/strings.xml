@@ -10,4 +10,7 @@
     <string name="severe">Severe</string>
     <string name="description">Description</string>
     <string name="crime">Crime</string>
+    <string name="new_password">New password</string>
+    <string name="email">Email</string>
+    <string name="sign_in">sign-in</string>
 </resources>

@@ -12,6 +12,7 @@ import com.david.mapa.utils.BitmapHelper
 import com.david.mapa.ui.adapter.MarkerInfoAdapter
 import com.david.mapa.Model.PlaceModel
 import com.david.mapa.R
+import com.david.mapa.ui.activity.fragments.FragmentAddMenu
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
