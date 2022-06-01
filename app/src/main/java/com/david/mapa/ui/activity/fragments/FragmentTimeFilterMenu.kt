@@ -1,4 +1,4 @@
-package com.david.mapa.ui.activity
+package com.david.mapa.ui.activity.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

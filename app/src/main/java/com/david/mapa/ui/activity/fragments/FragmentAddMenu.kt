@@ -1,4 +1,4 @@
-package com.david.mapa.ui.activity
+package com.david.mapa.ui.activity.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.*
 import com.david.mapa.Model.PlaceModel
 import com.david.mapa.R
+import com.david.mapa.ui.activity.MapsActivity
 
 /**
  * A simple [Fragment] subclass.
