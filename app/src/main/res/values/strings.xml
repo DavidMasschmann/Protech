@@ -3,4 +3,11 @@
     <string name="title_activity_maps">MapsActivity</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="add_crime_to_the_map">Add Crime to the Map</string>
+    <string name="dropped_pin">Dropped Pin</string>
+    <string name="light">Light</string>
+    <string name="regular">Regular</string>
+    <string name="severe">Severe</string>
+    <string name="description">Description</string>
+    <string name="crime">Crime</string>
 </resources>
