@@ -88,9 +88,14 @@
             android:layout_width="90dp"
             android:layout_height="90dp"
 
+            android:drawableTintMode="multiply"
+            android:drawableTint="@color/crime_drawable_type_selector"
+
+            android:textColor="@color/crime_text_type_selector"
+
             android:button="@color/transparent"
-            android:textAlignment="center"
             android:layout_weight="1"
+            android:textAlignment="center"
             android:textSize="20sp"
             android:textStyle="bold"
             />
@@ -103,11 +108,17 @@
             android:layout_width="90dp"
             android:layout_height="90dp"
 
+            android:drawableTintMode="multiply"
+            android:drawableTint="@color/crime_drawable_type_selector"
+
+            android:textColor="@color/crime_text_type_selector"
+
             android:button="@color/transparent"
             android:textAlignment="center"
             android:layout_weight="1"
             android:textSize="20sp"
             android:textStyle="bold"
+            android:checked="true"
             />
 
         <RadioButton
@@ -117,6 +128,11 @@
 
             android:layout_width="90dp"
             android:layout_height="90dp"
+
+            android:drawableTintMode="multiply"
+            android:drawableTint="@color/crime_drawable_type_selector"
+
+            android:textColor="@color/crime_text_type_selector"
 
             android:button="@color/transparent"
             android:textAlignment="center"
