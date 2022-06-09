@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".ui.activity.MapsActivity">
 
-    <fragment
+    <androidx.fragment.app.FragmentContainerView
         android:id="@+id/map"
         class="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
@@ -23,8 +23,8 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             android:clickable="true"
-            android:contentDescription="Open add marker floating menu"
-            android:text="Open add marker floating menu"
+            android:contentDescription="@string/open_add_marker_floating_menu"
+            android:text="@string/open_add_marker_floating_menu"
             app:backgroundTint="@color/main_yellow"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -53,8 +53,8 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             android:clickable="true"
-            android:contentDescription="Open history menu"
-            android:text="Open history menu"
+            android:contentDescription="@string/open_time_filter_menu"
+            android:text="@string/open_time_filter_menu"
             app:backgroundTint="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/notification_button"
@@ -93,7 +93,4 @@
             app:layout_constraintStart_toStartOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
 </FrameLayout>

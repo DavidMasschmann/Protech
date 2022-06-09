@@ -75,7 +75,6 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
             replace(R.id.fragmentContainerView, fragment)
                 .addToBackStack(null)
                 .commit()
-
         }
     }
 

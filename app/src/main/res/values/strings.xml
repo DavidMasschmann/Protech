@@ -13,4 +13,8 @@
     <string name="new_password">New password</string>
     <string name="email">Email</string>
     <string name="sign_in">sign-in</string>
+    <string name="time_filter">Time Filter</string>
+    <string name="filter_crimes">Filter crimes</string>
+    <string name="open_add_marker_floating_menu">Open add marker floating menu</string>
+    <string name="open_time_filter_menu">Open time filter menu</string>
 </resources>

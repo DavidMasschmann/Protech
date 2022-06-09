@@ -26,7 +26,7 @@ class FragmentAddMenu : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        var view = inflater.inflate(R.layout.fragment_add_menu, container, false)
+        val view = inflater.inflate(R.layout.fragment_add_menu, container, false)
 
         addCrimeButton = view.findViewById(R.id.add_crime_button)
 
