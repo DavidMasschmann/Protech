@@ -2,17 +2,22 @@ package com.david.mapa.ui.activity
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.content.Intent
+import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
 import android.location.Location
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
-import com.david.mapa.utils.BitmapHelper
-import com.david.mapa.ui.adapter.MarkerInfoAdapter
-import com.david.mapa.Model.PlaceModel
 import com.david.mapa.R
+import com.david.mapa.model.PlaceModel
 import com.david.mapa.ui.activity.fragments.FragmentAddMenu
+import com.david.mapa.ui.activity.login.LoginOrRegisterActivity
+import com.david.mapa.ui.adapter.MarkerInfoAdapter
+import com.david.mapa.utils.BitmapHelper
+import com.google.android.gms.common.api.Status
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -22,10 +27,17 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.libraries.places.api.Places
+import com.google.android.libraries.places.api.model.Place
+import com.google.android.libraries.places.widget.AutocompleteSupportFragment
+import com.google.android.libraries.places.widget.listener.PlaceSelectionListener
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 
-class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener, GoogleMap.OnMapClickListener {
+
+class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener,
+    GoogleMap.OnMapClickListener {
 
     private lateinit var placeData: DatabaseReference
     private lateinit var mMap: GoogleMap
@@ -35,6 +47,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
     private var markerOnMap: Boolean = false
     lateinit var addMarkerButton: FloatingActionButton
     lateinit var marker: Marker
+    private lateinit var user: FirebaseAuth
 
     companion object {
         private const val LOCATION_REQUEST_CODE = 1
@@ -46,6 +59,102 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
         setupMap()
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
         configMarkerButton()
+        setupSearchAutocomplete()
+        setupLogoutBtn()
+    }
+
+    //When maps activity is inflated call this:
+    @SuppressLint("PotentialBehaviorOverride")
+    override fun onMapReady(googleMap: GoogleMap) {
+        mMap = googleMap
+        mMap.uiSettings.isMapToolbarEnabled = false
+        mMap.setOnMapClickListener(this)
+        mMap.setOnMarkerClickListener(this)
+        getPermissions()
+        setupMyLocationBtn()
+    }
+
+    private fun setupMyLocationBtn() {
+        var currentLatLong: LatLng? = null
+
+        if (ActivityCompat.checkSelfPermission(
+                this,
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                this,
+                Manifest.permission.ACCESS_COARSE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            return
+        }
+        fusedLocationClient.lastLocation.addOnSuccessListener(this) { location ->
+            if (location != null) {
+                lastLocation = location
+                currentLatLong = LatLng(lastLocation.latitude, lastLocation.longitude)
+                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLatLong!!, 15f))
+            }
+        }
+
+        val gpsBtn = findViewById<FloatingActionButton>(R.id.gps_button)
+        gpsBtn.setOnClickListener(){
+            val cameraUpdate = currentLatLong?.let { CameraUpdateFactory.newLatLngZoom(it, 15f) }
+            if (cameraUpdate != null) {
+                mMap.animateCamera(cameraUpdate)
+            }
+        }
+    }
+
+    private fun setupLogoutBtn() {
+        user = FirebaseAuth.getInstance()
+        val logoutBtn = findViewById<FloatingActionButton>(R.id.logout_button)
+        logoutBtn.setOnClickListener() {
+            user.signOut()
+            startActivity(Intent(this, LoginOrRegisterActivity::class.java))
+        }
+    }
+
+    private fun setupSearchAutocomplete() {
+        // Initializing the Places API
+        // with the help of our API_KEY
+        val apiKey = getApiKey()
+
+        Places.initialize(applicationContext, apiKey)
+
+        // Initialize Autocomplete Fragments
+        // from the main activity layout file
+        val autocompleteSupportFragment =
+            supportFragmentManager.findFragmentById(R.id.autocomplete_fragment) as AutocompleteSupportFragment?
+
+        // Information that we wish to fetch after typing
+        // the location and clicking on one of the options
+        autocompleteSupportFragment!!.setPlaceFields(
+            listOf(
+                Place.Field.NAME,
+                Place.Field.ADDRESS,
+                Place.Field.PHONE_NUMBER,
+                Place.Field.LAT_LNG,
+                Place.Field.OPENING_HOURS,
+                Place.Field.RATING,
+                Place.Field.USER_RATINGS_TOTAL
+            )
+        )
+
+        // Display the fetched information after clicking on one of the options
+        autocompleteSupportFragment.setOnPlaceSelectedListener(object : PlaceSelectionListener {
+            override fun onPlaceSelected(place: Place) {
+                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(place.latLng!!, 15f))
+            }
+
+            override fun onError(status: Status) {
+                Toast.makeText(applicationContext, "Some error occurred", Toast.LENGTH_SHORT).show()
+            }
+        })
+    }
+
+    private fun getApiKey(): String {
+        val ai: ApplicationInfo = applicationContext.packageManager
+            .getApplicationInfo(applicationContext.packageName, PackageManager.GET_META_DATA)
+        return ai.metaData["com.google.android.geo.API_KEY"].toString()
     }
 
     private fun configMarkerButton() {
@@ -86,16 +195,6 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
         fragmentTransaction.commit()
     }
 
-    //When maps activy is inflated call this:
-    @SuppressLint("PotentialBehaviorOverride")
-    override fun onMapReady(googleMap: GoogleMap) {
-        mMap = googleMap
-        mMap.uiSettings.isMapToolbarEnabled = false
-        mMap.setOnMapClickListener(this)
-        mMap.setOnMarkerClickListener(this)
-        getPermissions()
-    }
-
     //Check app permissions
     private fun getPermissions() {
         if (ActivityCompat.checkSelfPermission(
@@ -110,7 +209,10 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
             )
             return
         }
+
         mMap.isMyLocationEnabled = true
+        mMap.uiSettings.isMyLocationButtonEnabled = false
+
         fusedLocationClient.lastLocation.addOnSuccessListener(this) { location ->
             if (location != null) {
                 lastLocation = location
@@ -141,6 +243,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
         return false
     }
 
+    //Show add marker button and center camera on click
     override fun onMapClick(temporaryMarker: LatLng) {
         placeMarkerOnMap(temporaryMarker)
         addMarkerButton.show()
@@ -208,6 +311,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
                     markersFilter(googleMap, places)
                 }
             }
+
             override fun onCancelled(error: DatabaseError) {
                 TODO("Not yet implemented")
             }

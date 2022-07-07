@@ -6,7 +6,7 @@ import android.view.View
 import android.widget.TextView
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.Marker
-import com.david.mapa.Model.PlaceModel
+import com.david.mapa.model.PlaceModel
 import com.david.mapa.R
 
 //This class create a custom layout when user click on markers
