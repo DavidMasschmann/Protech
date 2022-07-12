@@ -27,6 +27,11 @@ class SignUpActivity : AppCompatActivity() {
         }
     }
 
+    override fun onBackPressed() {
+        super.onBackPressed()
+        startActivity(Intent(this, LoginOrRegisterActivity::class.java))
+    }
+
     private fun registerUser() {
         val email = findViewById<EditText>(R.id.username).text.toString()
         val password = findViewById<EditText>(R.id.email).text.toString()
@@ -39,9 +44,8 @@ class SignUpActivity : AppCompatActivity() {
                         if (task.isSuccessful){
                             Toast.makeText(this, getString(R.string.user_added), Toast.LENGTH_SHORT).show()
 
-                            startActivity(Intent(this, MapsActivity::class.java))
                             finish()
-                            LoginOrRegisterActivity().finish()
+                            startActivity(Intent(this, MapsActivity::class.java))
                         } else {
                             Toast.makeText(this, task.exception!!.message, Toast.LENGTH_SHORT).show()
                         }

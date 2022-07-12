@@ -42,4 +42,5 @@
     <string name="send_reset_email">Send reset email</string>
     <string name="account_logout">Account logout</string>
     <string name="center_map_to_your_location">Center map to your location</string>
+    <string name="open_your_reports">Open your reports</string>
 </resources>

@@ -30,8 +30,11 @@ class SignInActivity : AppCompatActivity() {
         resetPasswordBtn.setOnClickListener {
             startActivity(Intent(this, ResetPasswordActivity::class.java))
         }
+    }
 
-
+    override fun onBackPressed() {
+        super.onBackPressed()
+        startActivity(Intent(this, LoginOrRegisterActivity::class.java))
     }
 
     private fun loginUser() {
@@ -42,9 +45,8 @@ class SignInActivity : AppCompatActivity() {
             user.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(SignInActivity()){ task ->
                     if (task.isSuccessful){
-                        startActivity(Intent(this, MapsActivity::class.java))
                         finish()
-//                        LoginOrRegisterActivity().finish()
+                        startActivity(Intent(this, MapsActivity::class.java))
                     } else {
                         Toast.makeText(this, task.exception!!.message, Toast.LENGTH_SHORT).show()
                     }

@@ -231,7 +231,6 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
         } else {
             removeMarkerOnMap(this.marker)
             this.marker = mMap.addMarker(markerOptions)!!
-
         }
     }
 
@@ -264,7 +263,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
                                 BitmapHelper.vectorToBitmap(this, R.drawable.light_crime)
                             )
                     )
-                    fixedMarker?.tag = place
+//                    fixedMarker?.tag = place
                 }
                 "Regular" -> {
                     val fixedMarker = googleMap.addMarker(
@@ -276,7 +275,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
                                 BitmapHelper.vectorToBitmap(this, R.drawable.regular_crime)
                             )
                     )
-                    fixedMarker?.tag = place
+//                    fixedMarker?.tag = place
                 }
                 "Severe" -> {
                     val fixedMarker = googleMap.addMarker(
@@ -288,7 +287,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
                                 BitmapHelper.vectorToBitmap(this, R.drawable.severe_crime)
                             )
                     )
-                    fixedMarker?.tag = place
+//                    fixedMarker?.tag = place
                 }
             }
         }

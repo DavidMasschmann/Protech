@@ -24,13 +24,13 @@ class LoginOrRegisterActivity : AppCompatActivity() {
 
         signInBtn.setOnClickListener {
             startActivity(Intent(this, SignInActivity::class.java))
+            finish()
         }
 
         signUpBtn.setOnClickListener {
             startActivity(Intent(this, SignUpActivity::class.java))
+            finish()
         }
-
-
     }
 
     private fun checkIfUserIsLogged() {
@@ -39,6 +39,4 @@ class LoginOrRegisterActivity : AppCompatActivity() {
             startActivity(Intent(this, MapsActivity::class.java))
         }
     }
-
-
 }
