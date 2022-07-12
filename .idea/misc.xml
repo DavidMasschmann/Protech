@@ -3,6 +3,35 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/TCC/Protech/app/src/main/res/drawable/crime_drawable_regular_selector.xml" value="0.1" />
+        <entry key="..\:/TCC/Protech/app/src/main/res/drawable/crime_drawable_severe_selector.xml" value="0.1" />
+        <entry key="..\:/TCC/Protech/app/src/main/res/drawable/crime_drawable_type_selector.xml" value="0.175" />
+        <entry key="..\:/TCC/Protech/app/src/main/res/drawable/gray_crime.xml" value="0.1425" />
+        <entry key="..\:/TCC/Protech/app/src/main/res/drawable/ic_baseline_account_circle_24.xml" value="0.145" />
+        <entry key="..\:/TCC/Protech/app/src/main/res/drawable/ic_baseline_add_24.xml" value="0.1155" />
+        <entry key="..\:/TCC/Protech/app/src/main/res/drawable/ic_baseline_delete_24.xml" value="0.2145" />
+        <entry key="..\:/TCC/Protech/app/src/main/res/drawable/ic_baseline_gps_fixed_24.xml" value="0.1155" />
+        <entry key="..\:/TCC/Protech/app/src/main/res/drawable/ic_baseline_history_24.xml" value="0.1345" />
+        <entry key="..\:/TCC/Protech/app/src/main/res/drawable/ic_baseline_list_24.xml" value="0.1345" />
+        <entry key="..\:/TCC/Protech/app/src/main/res/drawable/ic_baseline_logout_24.xml" value="0.1155" />
+        <entry key="..\:/TCC/Protech/app/src/main/res/drawable/ic_baseline_notifications_none_24.xml" value="0.1155" />
+        <entry key="..\:/TCC/Protech/app/src/main/res/drawable/ic_baseline_settings_24.xml" value="0.145" />
+        <entry key="..\:/TCC/Protech/app/src/main/res/drawable/ic_launcher_background.xml" value="0.145" />
+        <entry key="..\:/TCC/Protech/app/src/main/res/drawable/light_crime.xml" value="0.1425" />
+        <entry key="..\:/TCC/Protech/app/src/main/res/drawable/regular_crime.xml" value="0.1425" />
+        <entry key="..\:/TCC/Protech/app/src/main/res/drawable/severe_crime.xml" value="0.1425" />
+        <entry key="..\:/TCC/Protech/app/src/main/res/layout/activity_crime_list.xml" value="0.5" />
+        <entry key="..\:/TCC/Protech/app/src/main/res/layout/activity_forgot_password.xml" value="0.33" />
+        <entry key="..\:/TCC/Protech/app/src/main/res/layout/activity_login.xml" value="0.22" />
+        <entry key="..\:/TCC/Protech/app/src/main/res/layout/activity_login_or_register.xml" value="0.25" />
+        <entry key="..\:/TCC/Protech/app/src/main/res/layout/activity_maps.xml" value="0.33" />
+        <entry key="..\:/TCC/Protech/app/src/main/res/layout/activity_register.xml" value="0.2194871794871795" />
+        <entry key="..\:/TCC/Protech/app/src/main/res/layout/activity_reset_password.xml" value="0.22291666666666668" />
+        <entry key="..\:/TCC/Protech/app/src/main/res/layout/bubble.xml" value="0.5" />
+        <entry key="..\:/TCC/Protech/app/src/main/res/layout/crime_item.xml" value="0.5" />
+        <entry key="..\:/TCC/Protech/app/src/main/res/layout/custom_marker_info.xml" value="0.22291666666666668" />
+        <entry key="..\:/TCC/Protech/app/src/main/res/layout/fragment_add_menu.xml" value="0.2194871794871795" />
+        <entry key="..\:/TCC/Protech/app/src/main/res/layout/fragment_time_filter_menu.xml" value="0.22291666666666668" />
         <entry key="..\:/Users/david/AndroidStudioProjects/ProTech/app/src/main/res/drawable-v24/myview.xml" value="0.2390625" />
         <entry key="..\:/Users/david/AndroidStudioProjects/ProTech/app/src/main/res/drawable-v24/rounded_edittext.xml" value="0.2390625" />
         <entry key="..\:/Users/david/AndroidStudioProjects/ProTech/app/src/main/res/drawable-v24/rounded_edittext_shadow.xml" value="0.2390625" />
