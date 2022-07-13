@@ -64,7 +64,7 @@ class FragmentAddMenu : Fragment(){
             crimeDescription.text.clear()
             crimeTypeGroup.clearCheck()
 
-            activityVariable.removeMarkerOnMap(activityVariable.marker)
+            activityVariable.marker.remove()
             activityVariable.addMarkerButton.hide()
         }
 

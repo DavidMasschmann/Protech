@@ -25,6 +25,7 @@
     <string name="password_match">Passwords don\'t match</string>
     <string name="email_password_empty">Email and password can\'t be empty</string>
     <string name="user_added">User added successfully</string>
+    <string name="empty_description">Crime sem descrição.</string>
     <!-- Preference Titles -->
     <string name="messages_header">Messages</string>
     <string name="sync_header">Sync</string>

@@ -52,10 +52,10 @@ class MapsActivity
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private lateinit var fragmentAddMenu: FragmentAddMenu
     private var markerOnMap: Boolean = false
-    @Inject lateinit var repository: PlaceRepository
     lateinit var addMarkerButton: FloatingActionButton
     lateinit var marker: Marker
     private lateinit var user: FirebaseAuth
+    private lateinit var repository: PlaceRepository
 
     companion object {
         private const val LOCATION_REQUEST_CODE = 1
@@ -226,17 +226,13 @@ class MapsActivity
     //Place a temporary marker when the user clicks on the map
     private fun placeMarkerOnMap(temporaryMarker: LatLng) {
         val markerOptions = MarkerOptions().position(temporaryMarker)
-        if (markerOnMap) {
+        if (!markerOnMap) {
             marker = mMap.addMarker(markerOptions)!!
-            markerOnMap
+            markerOnMap = true
         } else {
-            removeMarkerOnMap(marker)
-            this.marker = mMap.addMarker(markerOptions)!!
+            marker.remove()
+            marker = mMap.addMarker(markerOptions)!!
         }
-    }
-
-    fun removeMarkerOnMap(marker: Marker) {
-        marker.remove()
     }
 
     override fun onMarkerClick(p0: Marker): Boolean {

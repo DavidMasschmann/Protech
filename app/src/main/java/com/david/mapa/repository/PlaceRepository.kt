@@ -15,5 +15,4 @@ class PlaceRepository @Inject constructor(
     fun deletePlace(placeModel: PlaceModel){
         reference.child("Place").child(placeModel.id.toString()).removeValue()
     }
-
 }
