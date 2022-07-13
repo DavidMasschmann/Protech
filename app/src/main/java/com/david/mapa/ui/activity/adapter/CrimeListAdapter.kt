@@ -39,7 +39,34 @@ class CrimeListAdapter(
                 description.text = place.desc?.limitDescription(20) ?:
                     holder.itemView.context.getString(R.string.empty_description)
             }
+            when(place.type){
+                "Light" -> {
+                    crimeIcon.setImageResource(R.drawable.light_crime)
+                }
+                "Regular" -> {
+                    crimeIcon.setImageResource(R.drawable.regular_crime)
+                }
+                "Severe" -> {
+                    crimeIcon.setImageResource(R.drawable.severe_crime)
+                }
+            }
         }
+
+        holder.binding.deleteBtn.setOnClickListener{
+            onDeleteItemClick?.let{
+                it(place)
+            }
+        }
+    }
+
+    private var onDeleteItemClick: ((PlaceModel) -> Unit)? = null
+
+    fun setOnclickListener(listener: (PlaceModel) -> Unit){
+        onDeleteItemClick = listener
+    }
+
+    fun getCharacterPosition(position: Int): PlaceModel {
+        return places[position]
     }
 }
 

@@ -11,9 +11,7 @@ import com.google.firebase.database.*
 
 class CrimeListActivity : AppCompatActivity() {
 
-    private lateinit var _list: List<PlaceModel>
-    private val crimeListAdapter by lazy { CrimeListAdapter(this, _list) }
-
+    lateinit var myAdapter: CrimeListAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,11 +19,17 @@ class CrimeListActivity : AppCompatActivity() {
         getData()
     }
 
+    private fun clickAdapter() {
+        myAdapter.setOnclickListener { placeModel ->
+            FirebaseDatabase.getInstance().getReference("Place").child(placeModel.id.toString()).removeValue()
+        }
+    }
+
     private fun getData() {
         val placeData = FirebaseDatabase.getInstance().getReference("Place")
-        val places: ArrayList<PlaceModel> = arrayListOf()
         placeData.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
+                val places: ArrayList<PlaceModel> = arrayListOf()
                 if (snapshot.exists()) {
                     for (data in snapshot.children) {
 
@@ -35,8 +39,8 @@ class CrimeListActivity : AppCompatActivity() {
                         }
                     }
                 }
-                _list = places
-                setupRecyclerView()
+                setupRecyclerView(places)
+                clickAdapter()
             }
             override fun onCancelled(error: DatabaseError) {
                 TODO("Not yet implemented")
@@ -44,9 +48,10 @@ class CrimeListActivity : AppCompatActivity() {
         })
     }
 
-    private fun setupRecyclerView() {
+    private fun setupRecyclerView(places: ArrayList<PlaceModel>) {
         findViewById<RecyclerView>(R.id.recyclerView).apply {
-            adapter = crimeListAdapter
+            adapter = CrimeListAdapter(this.context, places)
+            myAdapter = adapter as CrimeListAdapter
             layoutManager = LinearLayoutManager(context)
         }
     }
