@@ -8,7 +8,10 @@ import android.view.ViewGroup
 import android.widget.*
 import com.david.mapa.model.PlaceModel
 import com.david.mapa.R
+import com.david.mapa.repository.PlaceRepository
 import com.david.mapa.ui.activity.MapsActivity
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 /**
  * A simple [Fragment] subclass.
@@ -16,8 +19,10 @@ import com.david.mapa.ui.activity.MapsActivity
  * create an instance of this fragment.
  */
 
-class FragmentAddMenu : Fragment() {
+@AndroidEntryPoint
+class FragmentAddMenu : Fragment(){
 
+    @Inject lateinit var repository: PlaceRepository
     lateinit var place: PlaceModel
     lateinit var addCrimeButton: Button
 
@@ -43,6 +48,7 @@ class FragmentAddMenu : Fragment() {
             val activityVariable: MapsActivity = activity as MapsActivity
 
             place = PlaceModel(
+                System.currentTimeMillis().toInt(),
                 crimeName.text.toString(),
                 crimeDescription.text.toString(),
                 crimeType.text.toString(),
@@ -52,7 +58,7 @@ class FragmentAddMenu : Fragment() {
 
             activityVariable.emptyFragment(this)
 
-            place.save()
+            repository.setPlace(place)
 
             crimeName.text.clear()
             crimeDescription.text.clear()
