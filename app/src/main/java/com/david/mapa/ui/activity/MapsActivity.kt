@@ -35,10 +35,7 @@ import com.google.android.libraries.places.widget.listener.PlaceSelectionListene
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
-import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
-@AndroidEntryPoint
 class MapsActivity
     : AppCompatActivity(),
     OnMapReadyCallback,
@@ -55,7 +52,6 @@ class MapsActivity
     lateinit var addMarkerButton: FloatingActionButton
     lateinit var marker: Marker
     private lateinit var user: FirebaseAuth
-    private lateinit var repository: PlaceRepository
 
     companion object {
         private const val LOCATION_REQUEST_CODE = 1

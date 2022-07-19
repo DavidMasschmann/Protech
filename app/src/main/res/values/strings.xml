@@ -44,4 +44,6 @@
     <string name="account_logout">Account logout</string>
     <string name="center_map_to_your_location">Center map to your location</string>
     <string name="open_your_reports">Open your reports</string>
+    <string name="verification_email_sent">Verification e-mail sent, check you e-mail app</string>
+    <string name="your_occurrences">Your occurrences:</string>
 </resources>

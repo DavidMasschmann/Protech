@@ -8,10 +8,10 @@ import android.view.ViewGroup
 import android.widget.*
 import com.david.mapa.model.PlaceModel
 import com.david.mapa.R
-import com.david.mapa.repository.PlaceRepository
 import com.david.mapa.ui.activity.MapsActivity
-import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
+import java.util.*
 
 /**
  * A simple [Fragment] subclass.
@@ -19,11 +19,10 @@ import javax.inject.Inject
  * create an instance of this fragment.
  */
 
-@AndroidEntryPoint
-class FragmentAddMenu : Fragment(){
 
-    @Inject lateinit var repository: PlaceRepository
-    lateinit var place: PlaceModel
+class FragmentAddMenu : Fragment(){
+    private lateinit var user: FirebaseAuth
+    private lateinit var place: PlaceModel
     lateinit var addCrimeButton: Button
 
     override fun onCreateView(
@@ -39,6 +38,7 @@ class FragmentAddMenu : Fragment(){
         val crimeDescription = view.findViewById(R.id.crime_description) as EditText
         val crimeTypeGroup = view.findViewById(R.id.crime_type) as RadioGroup
         var crimeType: RadioButton
+        user = FirebaseAuth.getInstance()
 
         addCrimeButton.setOnClickListener {
 
@@ -52,13 +52,15 @@ class FragmentAddMenu : Fragment(){
                 crimeName.text.toString(),
                 crimeDescription.text.toString(),
                 crimeType.text.toString(),
+                user.currentUser?.uid.toString(),
+                Date(),
                 activityVariable.marker.position.latitude,
                 activityVariable.marker.position.longitude
             )
 
             activityVariable.emptyFragment(this)
 
-            repository.setPlace(place)
+            FirebaseDatabase.getInstance().getReference("Place").child(place.id.toString()).setValue(place)
 
             crimeName.text.clear()
             crimeDescription.text.clear()

@@ -4,7 +4,6 @@ plugins {
     id 'kotlin-kapt'
     id 'com.google.gms.google-services'
     id 'com.google.secrets_gradle_plugin' version '0.5'
-    id 'dagger.hilt.android.plugin'
 }
 
 android {
@@ -65,13 +64,4 @@ dependencies {
     implementation 'com.google.firebase:firebase-dynamic-links-ktx'
 
     implementation 'com.firebaseui:firebase-ui-auth:8.0.1'
-
-    //Hilt implementation
-    implementation "com.google.dagger:hilt-android:2.37"
-    kapt "com.google.dagger:hilt-android-compiler:2.37"
-    kapt "androidx.hilt:hilt-compiler:1.0.0"
-
-    // Coroutine Lifecycle Scopes
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1"
-    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.3.1"
 }

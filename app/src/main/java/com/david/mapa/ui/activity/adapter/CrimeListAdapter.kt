@@ -3,13 +3,14 @@ package com.david.mapa.ui.activity.adapter
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.AsyncListDiffer
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.david.mapa.R
 import com.david.mapa.databinding.CrimeItemBinding
 import com.david.mapa.model.PlaceModel
 import com.david.mapa.utils.limitDescription
+import java.text.DateFormat
+import java.text.SimpleDateFormat
+import java.util.*
 
 class CrimeListAdapter(
     private var context: Context,
@@ -31,15 +32,21 @@ class CrimeListAdapter(
 
     override fun onBindViewHolder(holder: CrimeViewHolder, position: Int) {
         val place = places[position]
+
         holder.binding.apply {
             title.text = place.title
-            if (place.desc == ""){
+            if (place.desc == "") {
                 description.text = holder.itemView.context.getString(R.string.empty_description)
-            }else{
-                description.text = place.desc?.limitDescription(20) ?:
-                    holder.itemView.context.getString(R.string.empty_description)
+            } else {
+                description.text = place.desc?.limitDescription(40)
             }
-            when(place.type){
+
+            val dateFormat : DateFormat = DateFormat.getDateInstance(DateFormat.LONG, Locale.CANADA)
+            val data = place.date?.let { dateFormat.format(it) }
+
+            date.text = data
+
+            when (place.type) {
                 "Light" -> {
                     crimeIcon.setImageResource(R.drawable.light_crime)
                 }
@@ -52,8 +59,8 @@ class CrimeListAdapter(
             }
         }
 
-        holder.binding.deleteBtn.setOnClickListener{
-            onDeleteItemClick?.let{
+        holder.binding.deleteBtn.setOnClickListener {
+            onDeleteItemClick?.let {
                 it(place)
             }
         }
@@ -61,12 +68,8 @@ class CrimeListAdapter(
 
     private var onDeleteItemClick: ((PlaceModel) -> Unit)? = null
 
-    fun setOnclickListener(listener: (PlaceModel) -> Unit){
+    fun setOnclickListener(listener: (PlaceModel) -> Unit) {
         onDeleteItemClick = listener
-    }
-
-    fun getCharacterPosition(position: Int): PlaceModel {
-        return places[position]
     }
 }
 
