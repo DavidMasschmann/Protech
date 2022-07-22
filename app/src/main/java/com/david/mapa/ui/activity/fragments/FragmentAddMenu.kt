@@ -1,5 +1,6 @@
 package com.david.mapa.ui.activity.fragments
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -51,7 +52,7 @@ class FragmentAddMenu : Fragment(){
                 System.currentTimeMillis().toInt(),
                 crimeName.text.toString(),
                 crimeDescription.text.toString(),
-                crimeType.text.toString(),
+                crimeType.tag.toString(),
                 user.currentUser?.uid.toString(),
                 Date(),
                 activityVariable.marker.position.latitude,

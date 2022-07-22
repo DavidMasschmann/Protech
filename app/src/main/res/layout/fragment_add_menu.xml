@@ -95,7 +95,9 @@
             android:textAlignment="center"
             android:textColor="@color/crime_text_type_selector"
             android:textSize="20sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:tag="Light"
+            />
 
         <RadioButton
             android:id="@+id/regular_radio"
@@ -113,6 +115,7 @@
             android:textSize="20sp"
             android:textStyle="bold"
             android:checked="true"
+            android:tag="Regular"
             />
 
         <RadioButton
@@ -130,6 +133,7 @@
             android:layout_weight="1"
             android:textSize="20sp"
             android:textStyle="bold"
+            android:tag="Severe"
             />
     </RadioGroup>
 
