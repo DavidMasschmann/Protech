@@ -8,8 +8,8 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.david.mapa.R
-import com.david.mapa.ui.activity.MapsActivity
 import com.google.firebase.auth.FirebaseAuth
+
 
 class SignUpActivity : AppCompatActivity() {
     private lateinit var user: FirebaseAuth
@@ -34,7 +34,7 @@ class SignUpActivity : AppCompatActivity() {
 
     private fun registerUser() {
         val email = findViewById<EditText>(R.id.username).text.toString()
-        val password = findViewById<EditText>(R.id.email).text.toString()
+        val password = findViewById<EditText>(R.id.password1).text.toString()
         val password2 = findViewById<EditText>(R.id.password2).text.toString()
         
         if (email.isNotEmpty() && password.isNotEmpty()) {
@@ -42,15 +42,19 @@ class SignUpActivity : AppCompatActivity() {
                 user.createUserWithEmailAndPassword(email, password)
                     .addOnCompleteListener(SignUpActivity()){ task ->
                         if (task.isSuccessful){
-                            Toast.makeText(this, getString(R.string.user_added), Toast.LENGTH_SHORT).show()
+//                            Toast.makeText(this, getString(R.string.user_added), Toast.LENGTH_SHORT).show()
 
-                            finish()
-                            startActivity(Intent(this, MapsActivity::class.java))
+                            user.addAuthStateListener {
+                                if (user.currentUser != null) {
+//                                    sendVerificationEmail()
+                                    finish()
+                                    startActivity(Intent(this, SignInActivity::class.java))
+                                }
+                            }
                         } else {
-                            Toast.makeText(this, task.exception!!.message, Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this, "aqui", Toast.LENGTH_SHORT).show()
                         }
                     }
-
             } else {
                 Toast.makeText(this, getString(R.string.password_match), Toast.LENGTH_SHORT).show()
             }
@@ -58,5 +62,26 @@ class SignUpActivity : AppCompatActivity() {
         } else {
             Toast.makeText(this, getString(R.string.email_password_empty), Toast.LENGTH_SHORT).show()
         }
+    }
+
+    private fun sendVerificationEmail() {
+        user.currentUser!!.sendEmailVerification()
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    // email sent
+                    // after email is sent just logout the user and finish this activity
+                    Toast.makeText(this, getString(R.string.verification_email_sent), Toast.LENGTH_SHORT).show()
+                    user.signOut()
+                    finish()
+                    startActivity(Intent(this, SignInActivity::class.java))
+                } else {
+                    // email not sent, so display message and restart the activity or do whatever you wish to do
+                    Toast.makeText(this, task.exception.toString(), Toast.LENGTH_SHORT).show()
+
+                    //restart this activity
+//                    finish()
+//                    startActivity(intent)
+                }
+            }
     }
 }

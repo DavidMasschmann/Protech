@@ -11,6 +11,7 @@ import com.david.mapa.R
 import com.david.mapa.ui.activity.MapsActivity
 import com.google.firebase.auth.FirebaseAuth
 
+
 class SignInActivity : AppCompatActivity() {
     private lateinit var user: FirebaseAuth
 
@@ -39,14 +40,17 @@ class SignInActivity : AppCompatActivity() {
 
     private fun loginUser() {
         val email = findViewById<EditText>(R.id.username).text.toString()
-        val password = findViewById<EditText>(R.id.email).text.toString()
+        val password = findViewById<EditText>(R.id.password1).text.toString()
 
         if (email.isNotEmpty() && password.isNotEmpty()) {
             user.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener(SignInActivity()){ task ->
+                .addOnCompleteListener(this){ task ->
                     if (task.isSuccessful){
+//                        Toast.makeText(this, "User logged in", Toast.LENGTH_SHORT).show()
+                        user.currentUser?.reload()
                         finish()
                         startActivity(Intent(this, MapsActivity::class.java))
+//                        checkIfEmailVerified()
                     } else {
                         Toast.makeText(this, task.exception!!.message, Toast.LENGTH_SHORT).show()
                     }
@@ -55,4 +59,21 @@ class SignInActivity : AppCompatActivity() {
             Toast.makeText(this, getString(R.string.email_password_empty), Toast.LENGTH_SHORT).show()
         }
     }
+
+    private fun checkIfEmailVerified() {
+        if (user.currentUser?.isEmailVerified == true) {
+            // user is verified
+            Toast.makeText(this, "Email verified", Toast.LENGTH_SHORT).show()
+
+            finish()
+            startActivity(Intent(this, MapsActivity::class.java))
+        } else {
+            // email is not verified, so just prompt the message to the user and restart this activity.
+            // NOTE: don't forget to log out the user.
+            Toast.makeText(this, "Your e-mail is not verified!", Toast.LENGTH_SHORT).show()
+            user.signOut()
+        }
+    }
+
+
 }

@@ -23,14 +23,14 @@ class ResetPasswordActivity : AppCompatActivity() {
 
         user = FirebaseAuth.getInstance()
 
-        emailEditText = findViewById(R.id.email)
+        emailEditText = findViewById(R.id.password1)
         resetPasswordBtn.setOnClickListener {
             resetPassword(emailEditText.text.toString().trim())
         }
     }
 
     private fun resetPassword(email: String) {
-        emailEditText = findViewById(R.id.email)
+        emailEditText = findViewById(R.id.password1)
 
         if (email.isEmpty()) {
             emailEditText.error = "Email is required"

@@ -1,5 +1,6 @@
 package com.david.mapa.ui.activity.fragments
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -9,6 +10,9 @@ import android.widget.*
 import com.david.mapa.model.PlaceModel
 import com.david.mapa.R
 import com.david.mapa.ui.activity.MapsActivity
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
+import java.util.*
 
 /**
  * A simple [Fragment] subclass.
@@ -16,9 +20,10 @@ import com.david.mapa.ui.activity.MapsActivity
  * create an instance of this fragment.
  */
 
-class FragmentAddMenu : Fragment() {
 
-    lateinit var place: PlaceModel
+class FragmentAddMenu : Fragment(){
+    private lateinit var user: FirebaseAuth
+    private lateinit var place: PlaceModel
     lateinit var addCrimeButton: Button
 
     override fun onCreateView(
@@ -34,6 +39,7 @@ class FragmentAddMenu : Fragment() {
         val crimeDescription = view.findViewById(R.id.crime_description) as EditText
         val crimeTypeGroup = view.findViewById(R.id.crime_type) as RadioGroup
         var crimeType: RadioButton
+        user = FirebaseAuth.getInstance()
 
         addCrimeButton.setOnClickListener {
 
@@ -43,22 +49,25 @@ class FragmentAddMenu : Fragment() {
             val activityVariable: MapsActivity = activity as MapsActivity
 
             place = PlaceModel(
+                System.currentTimeMillis().toInt(),
                 crimeName.text.toString(),
                 crimeDescription.text.toString(),
-                crimeType.text.toString(),
+                crimeType.tag.toString(),
+                user.currentUser?.uid.toString(),
+                Date(),
                 activityVariable.marker.position.latitude,
                 activityVariable.marker.position.longitude
             )
 
             activityVariable.emptyFragment(this)
 
-            place.save()
+            FirebaseDatabase.getInstance().getReference("Place").child(place.id.toString()).setValue(place)
 
             crimeName.text.clear()
             crimeDescription.text.clear()
             crimeTypeGroup.clearCheck()
 
-            activityVariable.removeMarkerOnMap(activityVariable.marker)
+            activityVariable.marker.remove()
             activityVariable.addMarkerButton.hide()
         }
 
