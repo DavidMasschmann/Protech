@@ -7,6 +7,7 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="white_50">#80FFFFFF</color>
     <color name="transparent">#00FFFFFF</color>
 
     <color name="main_yellow">#FFE600</color>
@@ -17,6 +18,7 @@
     //text
     <color name="high_emphasis_text">#DE000000</color>
     <color name="medium_emphasis_text">#80000000</color>
+    <color name="low_emphasis_text">#4D000000</color>
     <color name="light_blue_400">#FF29B6F6</color>
     <color name="light_blue_600">#FF039BE5</color>
     <color name="gray_400">#FFBDBDBD</color>

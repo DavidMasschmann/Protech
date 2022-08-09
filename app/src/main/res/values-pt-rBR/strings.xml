@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Protech</string>
+    <string name="add_crime_to_the_map">Adicionar Crime ao Mapa</string>
+    <string name="dropped_pin">Marcador Colocado</string>
+    <string name="light">Leve</string>
+    <string name="regular">Regular</string>
+    <string name="severe">Grave</string>
+    <string name="description">Descrição</string>
+    <string name="crime">Crime</string>
+    <string name="new_password">Nova Senha</string>
+    <string name="password">Senha</string>
+    <string name="email">E-mail</string>
+    <string name="sign_in">Entrar</string>
+    <string name="time_filter">Filtro de tempo</string>
+    <string name="filter_crimes">Filtro de Crimes</string>
+    <string name="open_add_marker_floating_menu">Abrir o menu flutuante para adicionar marcador</string>
+    <string name="open_time_filter_menu">Abrir o menu de filtro de tempo</string>
+    <string name="protech_logo">Logo Protech</string>
+    <string name="login">Entrar</string>
+    <string name="forgot_my_password">Esqueci minha senha</string>
+    <string name="sign_up">Cadastrar-se</string>
+    <string name="password_match">Senhas não são iguais</string>
+    <string name="email_password_empty">E-mail e senha não podem ser vazios</string>
+    <string name="user_added">Usuário adicionado com sucesso</string>
+    <string name="empty_description">Crime sem descrição</string>
+    <string name="messages_header">Menssagens</string>
+    <string name="your_occurrences">Suas ocorrencias:</string>
+    <string name="center_map_to_your_location">Centralizar mapa na sua localização</string>
+    <string name="account_logout">Sair da conta de usuário</string>
+    <string name="send_reset_email">Envial e-mail de recuperação</string>
+    <string name="verification_email_sent">E-mail de verificação enviado, confima seu e-mail</string>
+    <string name="open_your_reports">Abrir suas ocorrencias</string>
+</resources>

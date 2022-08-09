@@ -3,6 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/TCC/Protech/app/src/main/res/layout/activity_crime_list.xml" value="0.33" />
+        <entry key="..\:/TCC/Protech/app/src/main/res/layout/activity_login.xml" value="0.22291666666666668" />
+        <entry key="..\:/TCC/Protech/app/src/main/res/layout/activity_register.xml" value="0.22291666666666668" />
+        <entry key="..\:/TCC/Protech/app/src/main/res/layout/crime_item.xml" value="0.22291666666666668" />
+        <entry key="..\:/TCC/Protech/app/src/main/res/layout/fragment_add_menu.xml" value="0.25" />
         <entry key="..\:/Users/david/AndroidStudioProjects/ProTech/app/src/main/res/drawable-v24/myview.xml" value="0.2390625" />
         <entry key="..\:/Users/david/AndroidStudioProjects/ProTech/app/src/main/res/drawable-v24/rounded_edittext.xml" value="0.2390625" />
         <entry key="..\:/Users/david/AndroidStudioProjects/ProTech/app/src/main/res/drawable-v24/rounded_edittext_shadow.xml" value="0.2390625" />
@@ -21,6 +26,8 @@
         <entry key="..\:/Users/david/AndroidStudioProjects/ProTech/app/src/main/res/layout/fragment_time_filter_menu.xml" value="0.4425925925925926" />
         <entry key="..\:/Users/david/AndroidStudioProjects/ProTech/app/src/main/res/layout/layout.xml" value="0.5" />
         <entry key="..\:/Users/david/AndroidStudioProjects/ProTech/app/src/main/res/layout/sample_bubble.xml" value="0.67" />
+        <entry key="..\:/Users/marco/Documents/Trabalhos/kotlin/Protech/app/src/main/res/layout/activity_crime_list.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/marco/Documents/Trabalhos/kotlin/Protech/app/src/main/res/layout/crime_item.xml" value="0.36666666666666664" />
       </map>
     </option>
   </component>

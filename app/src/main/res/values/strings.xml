@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">Protech</string>
-    <string name="title_activity_maps">MapsActivity</string>
+    <string name="title_activity_maps" translatable="false">MapsActivity</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
     <string name="add_crime_to_the_map">Add Crime to the Map</string>
     <string name="dropped_pin">Dropped Pin</string>
     <string name="light">Light</string>
@@ -11,6 +11,39 @@
     <string name="description">Description</string>
     <string name="crime">Crime</string>
     <string name="new_password">New password</string>
-    <string name="email">Email</string>
-    <string name="sign_in">sign-in</string>
+    <string name="password">Password</string>
+    <string name="email">E-mail</string>
+    <string name="sign_in">Login</string>
+    <string name="time_filter">Time Filter</string>
+    <string name="filter_crimes">Filter crimes</string>
+    <string name="open_add_marker_floating_menu">Open add marker floating menu</string>
+    <string name="open_time_filter_menu">Open time filter menu</string>
+    <string name="protech_logo">Protech Logo</string>
+    <string name="login">Login</string>
+    <string name="forgot_my_password">Forgot my Password</string>
+    <string name="sign_up">Sign-up</string>
+    <string name="password_match">Passwords don\'t match</string>
+    <string name="email_password_empty">E-mail and password can\'t be empty</string>
+    <string name="user_added">User added successfully</string>
+    <string name="empty_description">Crime with no description</string>
+    <!-- Preference Titles -->
+    <string name="messages_header">Messages</string>
+    <string name="sync_header" translatable="false">Sync</string>
+
+    <!-- Messages Preferences -->
+    <string name="signature_title" translatable="false">Your signature</string>
+    <string name="reply_title" translatable="false">Default reply action</string>
+
+    <!-- Sync Preferences -->
+    <string name="sync_title" translatable="false">Sync email periodically</string>
+    <string name="attachment_title" translatable="false">Download incoming attachments</string>
+    <string name="attachment_summary_on" translatable="false">Automatically download attachments for incoming emails
+    </string>
+    <string name="attachment_summary_off" translatable="false">Only download attachments when manually requested</string>
+    <string name="send_reset_email">Send reset email</string>
+    <string name="account_logout">Account logout</string>
+    <string name="center_map_to_your_location">Center map to your location</string>
+    <string name="open_your_reports">Open your reports</string>
+    <string name="verification_email_sent">Verification e-mail sent, check you e-mail app</string>
+    <string name="your_occurrences">Your occurrences:</string>
 </resources>
